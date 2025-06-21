@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nex!daa Roles</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #4361ee;
+      --secondary: #3a0ca3;
+      --accent: #f72585;
+      --dark: #0f0c29;
+      --light-glow: rgba(255, 255, 255, 0.2);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(ellipse at top left, var(--dark), var(--secondary));
+      color: white;
+      padding: 40px 20px;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: #fff;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .role-box {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(67, 97, 238, 0.3);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--light-glow);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  opacity: 0;
+  transform: scale(0.9) translateY(40px);
+  filter: blur(5px);
+}
+
+    .role-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 150%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transform: skewX(-20deg);
+      transition: 0.5s;
+    }
+
+    .role-box:hover::before {
+      left: 100%;
+    }
+
+    .role-box:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 30px var(--primary);
+    }
+
+    .role-box h3 {
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      z-index: 1;
+      position: relative;
+    }
+
+    .role-box p {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      z-index: 1;
+      position: relative;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 12px 28px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: white;
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      background: transparent;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0%;
+      height: 100%;
+      background: var(--accent);
+      z-index: -1;
+      transition: width 0.3s ease;
+    }
+
+    .btn:hover::before {
+      width: 100%;
+    }
+
+    .btn:hover {
+      color: white;
+      border-radius: 20px;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .container {
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="role-box">
+      <h3>Founder</h3>
+      <p>Build and lead your startup from idea to success. Take the first step today!</p>
+      <a href="sign.html" class="btn">Get Started</a>
+    </div>
+    <div class="role-box">
+      <h3>Co-Founder</h3>
+      <p>Find your co-founder right now and start building the future together.</p>
+      <a href="sign.html" class="btn">Find Co-Founder</a>
+    </div>
+    <div class="role-box">
+      <h3>Investor</h3>
+      <p>Discover groundbreaking startups and invest in the next big success story.</p>
+      <a href="sign.html" class="btn">Find an Investor</a>
+    </div>
+    <div class="role-box">
+      <h3>Core Team</h3>
+      <p>Join a dynamic team, collaborate with innovators, and shape the future of startups.</p>
+      <a href="sign.html" class="btn">Join Now</a>
+    </div>
+    <div class="role-box">
+      <h3>Mentor</h3>
+      <p>Connect with experienced mentors, gain valuable insights, and grow your startup.</p>
+      <a href="sign.html" class="btn">Find Mentor</a>
+    </div>
+    <div class="role-box">
+      <h3>Learner</h3>
+      <p>Gain industry insights, enhance your skills, and grow with top startup leaders.</p>
+      <a href="sign.html" class="btn">Start Learning</a>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+     document.addEventListener('DOMContentLoaded', () => {
+    const tl = gsap.timeline();
+
+    tl.to(".role-box", {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      filter: "blur(0px)",
+      duration: 0.2,
+      ease: "power3.out",
+      stagger: {
+        each: 0.1
+      }
+    });
+  });
+  </script>
+
+</body>
+</html>

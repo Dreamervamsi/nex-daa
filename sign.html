@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nex'daa - Sign Up</title>
+    <style>
+        :root {
+            --royal-blue: #2a52be;
+            --dark-blue: #1a365d;
+            --black: #0f172a;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --gray: #94a3b8;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--dark-blue) 50%, var(--black) 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: var(--white);
+        }
+        
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-step {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        h1 {
+            color: var(--dark-blue);
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: var(--light-gray);
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--royal-blue);
+            box-shadow: 0 0 0 3px rgba(42, 82, 190, 0.2);
+        }
+        
+        button {
+            background-color: var(--royal-blue);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--gray);
+        }
+        
+        .login-link a {
+            color: var(--royal-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .step-indicator {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--dark-blue);
+            font-weight: 600;
+        }
+        
+        .styled-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-size: 16px;
+            color: #333;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 120px;
+            box-sizing: border-box;
+        }
+
+        .styled-textarea:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+            background-color: #fff;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: #e2e8f0;
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            width: 33%;
+            background-color: var(--royal-blue);
+            transition: width 0.4s ease;
+        }
+        
+        .error-message {
+            color: #e53e3e;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .step-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .step-buttons button {
+            flex: 1;
+        }
+        
+        .back-btn {
+            background-color: var(--gray);
+        }
+        
+        .back-btn:hover {
+            background-color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Welcome to Nex!daa</h1>
+        <p class="subtitle">Stay curious, keep learning, and grow every day</p>
+
+        <div class="progress-bar">
+            <div class="progress" id="progress-bar"></div>
+        </div>
+        <div class="step-indicator">Step <span id="current-step">1</span> of 3</div>
+
+        <!-- Step 1: Basic Info -->
+        <div id="step1" class="form-step active">
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" name="fullname" required>
+                <div class="error-message" id="name-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error-message" id="email-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <div class="error-message" id="password-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+                <div class="error-message" id="confirm-error"></div>
+            </div>
+            <button type="button" onclick="nextStep()">Continue</button>
+            <div class="login-link">
+                Already have an account? <a href="#">Login</a>
+            </div>
+        </div>
+
+        <!-- Step 2: Professional Info -->
+        <div id="step2" class="form-step">
+            <div class="form-group">
+                <label>Role/Position</label>
+                <select id="interest" name="interest">
+                    <option value="">Select Area of Interest</option>
+                    <option value="technology">Technology</option>
+                    <option value="business">Business</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="web development">Web development</option>
+                    <option value="UI/UX design">UI/UX Design</option>
+                </select>
+                <div class="error-message" id="interest-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="experience">Experience Level</label>
+                <select id="experience" name="experience">
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="description">Brief Description</label>
+                <textarea class="styled-textarea" id="description" name="description" rows="3" placeholder="Tell us about your professional background..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" placeholder="Eg: Vijayawada">
+            </div>
+            <div class="step-buttons">
+                <button type="button" class="back-btn" onclick="prevStep()">Back</button>
+                <button type="button" onclick="nextStep()">Continue</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Personal Info -->
+        <div id="step3" class="form-step">
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="10-digit number">
+                <div class="error-message" id="phone-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="birthdate">Date of Birth</label>
+                <input type="date" id="birthdate" name="birthdate">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                    <option value="">Prefer not to say</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="education">Education</label>
+                <input type="text" name="education" id="education" placeholder="Eg: Diploma">
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="terms" name="terms" required>
+                    I agree to the <a href="#" style="color: var(--royal-blue);">Terms of Service</a> and <a href="#" style="color: var(--royal-blue);">Privacy Policy</a>
+                </label>
+                <div class="error-message" id="terms-error"></div>
+            </div>
+            <div class="step-buttons">
+                <button type="button" class="back-btn" onclick="prevStep()">Back</button>
+                <button type="button" onclick="submitForm()">Complete Registration</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        function hideError(elementId) {
+            document.getElementById(elementId).style.display = 'none';
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validatePassword(password) {
+            return password.length >= 8;
+        }
+
+        function updateProgressBar() {
+            const progressPercentage = (currentStep / totalSteps) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercentage}%`;
+            document.getElementById('current-step').textContent = currentStep;
+        }
+
+        function nextStep() {
+            // Validate current step before proceeding
+            let isValid = true;
+            
+            if (currentStep === 1) {
+                // Step 1 validation
+                const name = document.getElementById('fullname').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                hideError('name-error');
+                hideError('email-error');
+                hideError('password-error');
+                hideError('confirm-error');
+                
+                if (!name) {
+                    showError('name-error', 'Please enter your full name');
+                    isValid = false;
+                }
+                
+                if (!email) {
+                    showError('email-error', 'Please enter your email');
+                    isValid = false;
+                } else if (!validateEmail(email)) {
+                    showError('email-error', 'Please enter a valid email address');
+                    isValid = false;
+                }
+                
+                if (!password) {
+                    showError('password-error', 'Please enter a password');
+                    isValid = false;
+                } else if (!validatePassword(password)) {
+                    showError('password-error', 'Password must be at least 8 characters');
+                    isValid = false;
+                }
+                
+                if (password !== confirmPassword) {
+                    showError('confirm-error', "Passwords don't match");
+                    isValid = false;
+                }
+            } else if (currentStep === 2) {
+                // Step 2 validation
+                const role = document.getElementById('interest').value;
+                
+                hideError('interest-error');
+                
+                if (!role) {
+                    showError('interest-error', 'Please select your role/position');
+                    isValid = false;
+                }
+            }
+            
+            if (!isValid) return;
+            
+            // Move to next step
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep++;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            updateProgressBar();
+        }
+        
+        function prevStep() {
+            if (currentStep > 1) {
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                currentStep--;
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                updateProgressBar();
+            }
+        }
+        
+        function submitForm() {
+            // Validate step 3
+            const phone = document.getElementById('phone').value.trim();
+            const terms = document.getElementById('terms').checked;
+            
+            hideError('phone-error');
+            hideError('terms-error');
+            
+            let isValid = true;
+            
+            if (phone && !/^\d{10}$/.test(phone)) {
+                showError('phone-error', 'Please enter a valid 10-digit phone number');
+                isValid = false;
+            }
+            
+            if (!terms) {
+                showError('terms-error', 'You must accept the terms and conditions');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Get all form values
+            const userData = {
+                name: document.getElementById('fullname').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                password: document.getElementById('password').value,
+                role: document.getElementById('interest').value,
+                experience: document.getElementById('experience').value,
+                description: document.getElementById('description').value.trim(),
+                location: document.getElementById('location').value.trim(),
+                phone: phone,
+                birthdate: document.getElementById('birthdate').value,
+                gender: document.getElementById('gender').value,
+                education: document.getElementById('education').value.trim()
+            };
+
+            // Store in localStorage
+            localStorage.setItem('User', JSON.stringify(userData));
+            
+            // Log to console for demonstration
+            console.log('User data:', userData);
+            
+            // Redirect to profile page
+            window.location.href = "profile.html";
+            return true;
+        }
+
+        // Initialize progress bar
+        updateProgressBar();
+    </script>
+</body>
+</html>
