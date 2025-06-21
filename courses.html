@@ -30,7 +30,12 @@
             min-height: 100vh;
             flex-direction: column;
         }
-        
+        .header-right{  
+            display: flex;
+            position: relative;
+            top: -10px;
+            justify-content: end;
+        }
         /* Sidebar Styles */
         aside {
             width: 100%;
@@ -48,6 +53,42 @@
             font-weight: bold;
             margin-bottom: 15px;
             color: var(--white);
+        }
+         .user-display-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .theme-toggle i {
+            font-size: 16px;
         }
         
         .menu {
@@ -467,6 +508,15 @@
     </aside>
     
     <main>
+        <div class="header-right">
+                <button class="theme-toggle" onclick="toggle()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                    <div class="user-display">
+                        <div class="user-display-avatar" id="display-avatar">R</div>
+                    </div>
+            </div>
+
         <div class="welcome-section">
             <h1 class="welcome-title">Welcome <span id="name"></span></h1>
             <p class="welcome-subtitle">Search and connect with co founders & core team</p>
