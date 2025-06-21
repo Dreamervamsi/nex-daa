@@ -731,18 +731,14 @@
     </main>
     
     <script>
-        // Set user data from localStorage
-        // Add error handling for localStorage
-        // Get user data from localStorage or use default 'Guest'
+        
         const storedUser = JSON.parse(localStorage.getItem('User')) || { name: 'Guest' };
 
-        // Set user information in the DOM
         if (storedUser.name) {
             document.getElementById('user-name').textContent = storedUser.name;
             document.getElementById('mobile-user-name').textContent = storedUser.name;
             document.getElementById('profile-name').textContent = storedUser.name;
             
-            // Set avatar initials (first letter of name)
             const initial = storedUser.name.charAt(0).toUpperCase();
             document.getElementById('user-avatar').textContent = initial;
             document.getElementById('mobile-user-avatar').textContent = initial;
@@ -771,7 +767,6 @@
             document.getElementById('city').textContent = `${storedUser.location}, India`;
         }
         
-        // Mobile menu functionality
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const topNav = document.getElementById('topNav');
         
@@ -780,7 +775,6 @@
             mobileMenuBtn.textContent = topNav.classList.contains('active') ? '✕' : '☰';
         });
         
-        // Close mobile menu when clicking on a menu item
         const menuLinks = document.querySelectorAll('.top-nav .menu a');
         menuLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -789,7 +783,6 @@
             });
         });
         
-        // Edit profile button functionality
         const editButtons = document.querySelectorAll('.edit-btn');
         editButtons.forEach(button => {
             button.addEventListener('click', function() {
@@ -798,7 +791,6 @@
             });
         });
         
-        // Edit avatar button
         document.querySelector('.edit-avatar').addEventListener('click', function() {
             alert('Avatar edit functionality would go here');
         });

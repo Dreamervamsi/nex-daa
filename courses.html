@@ -546,14 +546,12 @@
     </main>
     
     <script>
-        // Set user data from localStorage
         try {
             const storedUser = JSON.parse(localStorage.getItem('User'));
             if (storedUser) {
                 document.getElementById('user-name').textContent = storedUser.name;
                 document.getElementById('user-avatar').textContent = storedUser.name.charAt(0);
                 document.getElementById('user-role').textContent = storedUser.role
-                // Fixed: Checking if element exists before accessing it
                 const displayAvatar = document.getElementById('name');
                 if (displayAvatar) {
                     displayAvatar.textContent = storedUser.name;
