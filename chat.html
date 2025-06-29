@@ -12,20 +12,14 @@
             --light-text: #6c757d;
             --white: #ffffff;
             --border: #e9ecef;
-            --dark-bg: #1a1c2c;
-            --dark-secondary-bg: #2b2d42;
-            --dark-text-light: #d1d5db;
-            --dark-border: #3f4254;
+            --dark-bg: #000000;
+            --dark-secondary-bg: #1a1a1a;
+            --dark-card-bg: #2a2a2a;
+            --dark-text-light: #ffffff;
+            --dark-border: #3a3a3a;
+            --dark-light-text: #b0b0b0;
         }
         
-        [data-theme="dark"] {
-            --light-bg: var(--dark-bg);
-            --white: var(--dark-secondary-bg);
-            --dark-text: var(--dark-text-light);
-            --light-text: #9ca3af;
-            --border: var(--dark-border);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -39,6 +33,129 @@
             background-color: var(--light-bg);
             min-height: 100vh;
             flex-direction: row;
+        }
+
+        /* Dark mode styles */
+        body[data-theme="dark"] {
+            background-color: var(--dark-bg);
+        }
+
+        body[data-theme="dark"] aside {
+            background-color: var(--dark-secondary-bg);
+            border-color: var(--dark-border);
+        }
+
+        body[data-theme="dark"] .connections-header {
+            border-color: var(--dark-border);
+        }
+
+        body[data-theme="dark"] .connections-header h2 {
+            color: var(--dark-text-light);
+        }
+
+        body[data-theme="dark"] .theme-toggle {
+            border-color: var(--dark-border);
+            color: var(--dark-text-light);
+        }
+
+        body[data-theme="dark"] .theme-toggle:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        body[data-theme="dark"] .mobile-close {
+            color: var(--dark-text-light);
+        }
+
+        body[data-theme="dark"] .connection-item {
+            color: var(--dark-text-light);
+        }
+
+        body[data-theme="dark"] .connection-item:hover {
+            background-color: var(--dark-card-bg);
+        }
+
+        body[data-theme="dark"] .connection-item.active {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        body[data-theme="dark"] .connection-name {
+            color: var(--dark-text-light);
+        }
+
+        body[data-theme="dark"] .connection-item.active .connection-name {
+            color: var(--white);
+        }
+
+        body[data-theme="dark"] .connection-role {
+            color: var(--dark-light-text);
+        }
+
+        body[data-theme="dark"] .connection-item.active .connection-role {
+            color: var(--white);
+        }
+
+        body[data-theme="dark"] .chat-header {
+            background-color: var(--dark-secondary-bg);
+            border-color: var(--dark-border);
+        }
+
+        body[data-theme="dark"] .chat-header h1 {
+            color: var(--dark-text-light);
+        }
+
+        body[data-theme="dark"] .chat-header p {
+            color: var(--dark-light-text);
+        }
+
+        body[data-theme="dark"] .mobile-menu-toggle {
+            color: var(--dark-text-light);
+        }
+
+        body[data-theme="dark"] .messages-container {
+            background-color: var(--dark-bg);
+        }
+
+        body[data-theme="dark"] .message-group-header {
+            color: var(--dark-light-text);
+        }
+
+        body[data-theme="dark"] .message-group-header::before,
+        body[data-theme="dark"] .message-group-header::after {
+            background-color: var(--dark-border);
+        }
+
+        body[data-theme="dark"] .message-sender {
+            color: var(--dark-text-light);
+        }
+
+        body[data-theme="dark"] .message-text {
+            color: var(--dark-text-light);
+        }
+
+        body[data-theme="dark"] .message-time {
+            color: var(--dark-light-text);
+        }
+
+        body[data-theme="dark"] .chat-input {
+            background-color: var(--dark-secondary-bg);
+            border-color: var(--dark-border);
+        }
+
+        body[data-theme="dark"] .chat-input input {
+            background-color: var(--dark-card-bg);
+            border-color: var(--dark-border);
+            color: var(--dark-text-light);
+        }
+
+        body[data-theme="dark"] .chat-input input::placeholder {
+            color: var(--dark-light-text);
+        }
+
+        body[data-theme="dark"] .chat-input input:focus {
+            border-color: var(--primary);
+            outline: none;
         }
         
         /* Sidebar Styles */
@@ -80,12 +197,16 @@
             cursor: pointer;
             background: none;
             color: var(--dark-text);
-            transition: border 0.3s, color 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .theme-toggle:hover {
             border: 2px solid var(--primary);
             color: var(--primary);
+            transform: scale(1.05);
         }
 
         .connections-header h2 {
@@ -312,6 +433,10 @@
             background-color: var(--white);
             color: var(--dark-text);
         }
+
+        .chat-input input:focus {
+            border-color: var(--primary);
+        }
         
         .chat-input button {
             background-color: var(--primary);
@@ -321,6 +446,11 @@
             padding: 0 20px;
             margin-left: 10px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .chat-input button:hover {
+            background-color: #4169e1;
         }
         
         /* Responsive Styles */
@@ -412,12 +542,12 @@
             
             .chat-input input {
                 padding: 8px 12px;
-                bottom: 0; /* Fix for mobile positioning */
+                bottom: 0;
             }
             
             .chat-input button {
                 padding: 0 15px;
-                bottom: 0; /* Fix for mobile positioning */
+                bottom: 0;
             }
         }
     </style>
@@ -426,10 +556,13 @@
 <body>
     <aside id="sidebar">
         <div class="connections-header">
-            
-                <h2>Connections</h2>
+            <h2>Connections</h2>
+            <div class="header-right">
+                <button class="theme-toggle" onclick="toggleDarkMode()">
+                    <i class="fas fa-moon"></i>
+                </button>
                 <button class="mobile-close" id="close-sidebar">×</button>
-            
+            </div>
         </div>
         
         <div class="connection-item active">
@@ -482,11 +615,6 @@
                     <h1>Chat</h1>
                     <p>Search and connect with co-founders & core team</p>   
                 </div>
-                <div class="header-right">
-                    <button class="theme-toggle" onclick="toggle()">
-                        <i class="fas fa-moon"></i>
-                    </button>   
-                </div>
             </div>
         </div>
         
@@ -527,7 +655,7 @@
             </div>
         </div>
         
-        <div class="chat-input" >
+        <div class="chat-input">
             <form>
                 <input type="text" placeholder="Type a message...">
                 <button type="submit">Send</button>
@@ -536,38 +664,39 @@
     </div>
 
     <script>
+        let isDarkMode = false;
 
-               let isDarkMode = false;
+        function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            const body = document.body;
+            const icon = document.querySelector('.theme-toggle i');
 
-function toggle() {
-    isDarkMode = !isDarkMode;
+            if (isDarkMode) {
+                body.setAttribute('data-theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+                // Save preference
+                localStorage.setItem('darkMode', 'true');
+            } else {
+                body.removeAttribute('data-theme');
+                icon.classList.replace('fa-sun', 'fa-moon');
+                // Save preference
+                localStorage.setItem('darkMode', 'false');
+            }
+        }
 
-    if (isDarkMode) {
-    document.body.setAttribute('data-theme', 'dark');
-    let icon = document.getElementsByClassName('fa-moon')[0];
-    if (icon) {
-        icon.classList.replace('fa-moon', 'fa-sun');
-        icon.style.color = 'white';
+        // Load saved theme preference on page load
+        function loadThemePreference() {
+            const savedTheme = localStorage.getItem('darkMode');
+            if (savedTheme === 'true') {
+                isDarkMode = false; // Set to false so toggleDarkMode will set it to true
+                toggleDarkMode();
+            }
+        }
 
-       
-        icon.onmouseover = () => icon.style.color = 'royalblue';
-        icon.onmouseout = () => icon.style.color = 'white';
-    }
-} else {
-    document.body.removeAttribute('data-theme');
-    let icon = document.getElementsByClassName('fa-sun')[0];
-    if (icon) {
-        icon.classList.replace('fa-sun', 'fa-moon');
-        icon.style.color = 'black';
-
-       
-        icon.onmouseover = null;
-        icon.onmouseout = null;
-    }
-}
-
-}
         document.addEventListener('DOMContentLoaded', function() {
+            // Load theme preference
+            loadThemePreference();
+
             // Make connections clickable
             const connectionItems = document.querySelectorAll('.connection-item');
             connectionItems.forEach(item => {

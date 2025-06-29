@@ -7,456 +7,155 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary: royalblue;
+            /* Light theme colors */
+            --primary: #4169e1;
             --primary-light: #e6f0ff;
-            --dark: #1a1a1a;
-            --light: #f5f5f5;
-            --gray: #777;
-            --light-gray: #e0e0e0;
-            --white: #fff;
             --success: #4CAF50;
+            
+            /* Light theme variables */
+            --bg-primary: #f5f5f5;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #1a1a1a;
+            --text-secondary: #777777;
+            --text-tertiary: #cccccc;
+            --border-color: #e0e0e0;
+            --shadow: rgba(0, 0, 0, 0.05);
+            --sidebar-bg: #1a1a1a;
+            --sidebar-text: #ffffff;
+            --sidebar-text-muted: #cccccc;
+            --sidebar-hover: #333333;
         }
-        
+
+        [data-theme="dark"] {
+            /* Dark theme variables */
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2a2a2a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --text-tertiary: #888888;
+            --border-color: #333333;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --sidebar-bg: #000000;
+            --sidebar-text: #ffffff;
+            --sidebar-text-muted: #888888;
+            --sidebar-hover: #2a2a2a;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
-            background-color: var(--light);
-            min-height: 100vh;
             flex-direction: column;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .header-right{  
-            display: flex;
-            position: relative;
-            top: -10px;
-            justify-content: end;
-        }
+
         /* Sidebar Styles */
-        aside {
+        .sidebar {
             width: 100%;
-            background-color: var(--dark);
-            color: var(--white);
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
             padding: 15px 20px;
             position: sticky;
             top: 0;
             z-index: 100;
             transition: all 0.3s ease;
         }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: var(--white);
-        }
-         .user-display-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--primary-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .theme-toggle {
-            background: none;
-            border: 2px solid var(--border-color);
-            border-radius: 50px;
-            padding: 8px 16px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-primary);
-            font-size: 14px;
-            transition: all 0.3s ease;
-            margin-right: 15px;
-        }
 
-        .theme-toggle:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-1px);
-        }
-
-        .theme-toggle i {
-            font-size: 16px;
-        }
-        
-        .menu {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-        
-        .menu.active {
-            max-height: 1000px; /* Adjust based on your content */
-            margin-bottom: 15px;
-        }
-        
-        .menu li {
-            margin-bottom: 5px;
-        }
-        
-        .menu a {
-            color: #ccc;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            padding: 10px 12px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-        
-        .menu a:hover {
-            background-color: #333;
-            color: var(--white);
-        }
-        
-        .menu a.active {
-            background-color: var(--primary);
-            color: var(--white);
-            font-weight: 500;
-        }
-        
-        .menu a i {
-            margin-right: 10px;
-            font-size: 18px;
-        }
-        
-        .divider {
-            border-top: 1px solid #333;
-            margin: 15px 0;
-        }
-        
-        .user-profile {
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            display: none; /* Hidden by default on mobile */
-        }
-        
-        .user-profile:hover {
-            background-color: #333;
-        }
-        
-        .user-avatar {
-            width: 36px;
-            height: 36px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            margin-right: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-weight: bold;
-        }
-        
-        .user-info {
-            flex: 1;
-        }
-        
-        .user-name {
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .user-role {
-            font-size: 12px;
-            color: var(--gray);
-        }
-        
-        /* Main Content Styles */
-        main {
-            flex: 1;
-            padding: 30px;
-        }
-        
-        .welcome-section {
-            background-color: var(--white);
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .welcome-title {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-        
-        .welcome-subtitle {
-            color: var(--gray);
-            margin-bottom: 20px;
-        }
-        
-        .search-bar {
-            display: flex;
-            width: 100%;
-            max-width: 600px;
-        }
-        
-        .search-bar input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid var(--light-gray);
-            border-radius: 6px 0 0 6px;
-            font-size: 14px;
-            outline: none;
-        }
-        
-        .search-bar input:focus {
-            border-color: var(--primary);
-        }
-        
-        .search-bar button {
-            background-color: var(--primary);
-            color: var(--white);
-            border: none;
-            padding: 0 20px;
-            border-radius: 0 6px 6px 0;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .search-bar button:hover {
-            background-color: #4169e1;
-        }
-        
-        .section-title {
-            font-size: 20px;
-            margin: 30px 0 15px;
-            color: var(--dark);
-        }
-        
-        .sessions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .session-card {
-            background-color: var(--white);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .session-title {
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .session-details {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            color: var(--gray);
-            font-size: 14px;
-        }
-        
-        .session-details i {
-            margin-right: 8px;
-            color: var(--primary);
-        }
-        
-        .session-date {
-            font-size: 13px;
-            color: var(--gray);
-            margin-bottom: 15px;
-        }
-        
-        .session-btn {
-            background-color: var(--primary);
-            color: var(--white);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s;
-            display: inline-block;
-            text-decoration: none;
-        }
-        
-        .session-btn:hover {
-            background-color: #4169e1;
-        }
-        
-        .session-btn.live {
-            background-color: var(--success);
-        }
-        
-        .session-btn.live:hover {
-            background-color: #3d8b40;
-        }
-        
-        .recorded-videos {
-            background-color: var(--white);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-        }
-        
-        .video-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--light-gray);
-        }
-        
-        .video-item:last-child {
-            border-bottom: none;
-        }
-        
-        .video-info {
-            display: flex;
-            align-items: center;
-        }
-        
-        .video-thumbnail {
-            width: 50px;
-            height: 50px;
-            background-color: var(--light-gray);
-            border-radius: 5px;
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-        }
-        
-        .video-title {
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .video-duration {
-            font-size: 13px;
-            color: var(--gray);
-        }
-        
-        /* Mobile Menu Button */
-        .mobile-menu-btn {
-            display: block;
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            z-index: 1002;
-            background: transparent;
-            color: white;
-            border: none;
-            font-size: 24px;
-            padding: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
-        /* Responsive Styles */
-        @media (min-width: 993px) {
-            body {
-                flex-direction: row;
-            }
-            
-            aside {
-                width: 250px;
-                height: 100vh;
-                position: sticky;
-                top: 0;
-                display: flex;
-                flex-direction: column;
-                padding: 30px 20px;
-            }
-            
-            .menu {
-                display: flex;
-                flex-direction: column;
-                max-height: none;
-                overflow: visible;
-                margin-bottom: auto;
-            }
-            
-            .mobile-menu-btn {
-                display: none;
-            }
-            
-            .user-profile {
-                display: flex;
-            }
-            
-            main {
-                margin-left: 0;
-                padding-top: 30px;
-            }
-            
-            .header-container {
-                display: block;
-            }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--sidebar-text);
         }
-        
-        @media (max-width: 768px) {
-            .welcome-section {
-                padding: 20px;
-            }
-            
-            .sessions-grid {
-                grid-template-columns: 1fr;
-            }
+
+        .logo-accent {
+            color: #ff4444;
         }
-        
-        @media (max-width: 576px) {
-            main {
-                padding: 20px 15px;
-            }
-            
-            .welcome-title {
-                font-size: 20px;
-            }
-            
-            .section-title {
-                font-size: 18px;
-            }
+
+        .mobile-menu-btn {
+            display: block;
+            background: transparent;
+            color: var(--sidebar-text);
+            border: none;
+            font-size: 20px;
+            padding: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
-        
+
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .menu.active {
+            max-height: 500px;
+        }
+
+        .menu li {
+            margin-bottom: 5px;
+        }
+
         .menu-item-with-badge {
             position: relative;
         }
-        
+
+        .menu a {
+            color: var(--sidebar-text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .menu a:hover {
+            background-color: var(--sidebar-hover);
+            color: var(--sidebar-text);
+        }
+
+        .menu a.active {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+
+        .menu a i {
+            margin-right: 12px;
+            font-size: 18px;
+            width: 20px;
+        }
+
         .notification-badge {
             position: absolute;
-            top: -5px;
-            right: -5px;
-            padding: 10px;
-            background-color: red;
+            top: 8px;
+            right: 8px;
+            background-color: #ff4444;
             color: white;
             border-radius: 50%;
             width: 18px;
@@ -467,12 +166,396 @@
             font-size: 10px;
             font-weight: bold;
         }
+
+        .user-profile {
+            display: none;
+            align-items: center;
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .user-profile:hover {
+            background-color: var(--sidebar-hover);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--sidebar-text);
+        }
+
+        .user-role {
+            font-size: 12px;
+            color: var(--sidebar-text-muted);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .header-actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .user-display-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .welcome-section {
+            background-color: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .welcome-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .search-bar {
+            display: flex;
+            max-width: 600px;
+            box-shadow: 0 2px 10px var(--shadow);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .search-bar button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #3554d1;
+        }
+
+        .section-title {
+            font-size: 22px;
+            margin: 30px 0 20px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .sessions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .session-card {
+            background-color: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .session-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+
+        .session-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            font-size: 18px;
+        }
+
+        .session-details {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .session-details i {
+            margin-right: 8px;
+            color: var(--primary);
+            width: 16px;
+        }
+
+        .session-date {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .session-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .session-btn:hover {
+            background-color: #3554d1;
+            transform: translateY(-1px);
+        }
+
+        .session-btn.live {
+            background-color: var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        .session-btn.live:hover {
+            background-color: #3d8b40;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+        }
+
+        .recorded-videos {
+            background-color: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .video-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .video-item:last-child {
+            border-bottom: none;
+        }
+
+        .video-item:hover {
+            transform: translateX(5px);
+        }
+
+        .video-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .video-thumbnail {
+            width: 55px;
+            height: 55px;
+            background-color: var(--border-color);
+            border-radius: 8px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .video-thumbnail:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .video-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .video-duration {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (min-width: 993px) {
+            body {
+                flex-direction: row;
+            }
+
+            .sidebar {
+                width: 260px;
+                height: 100vh;
+                padding: 30px 20px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .header-container {
+                display: block;
+                margin-bottom: 30px;
+            }
+
+            .menu {
+                max-height: none;
+                overflow: visible;
+                margin-bottom: auto;
+                margin-top: 0;
+            }
+
+            .mobile-menu-btn {
+                display: none;
+            }
+
+            .user-profile {
+                display: flex;
+            }
+
+            .main-content {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sessions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-display-avatar {
+                display: none;
+            }
+
+            .welcome-section {
+                padding: 20px;
+            }
+
+            .search-bar {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-content {
+                padding: 15px;
+            }
+
+            .welcome-title {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .session-card {
+                padding: 20px;
+            }
+        }
+
+        /* Loading animation for smooth transitions */
+        .loading {
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
-<body>
-    <aside id="sidebar">
+<body data-theme="light" class="loading">
+    <aside class="sidebar" id="sidebar">
         <div class="header-container">
-            <div class="logo">nex<span style=color:red>!</span>daa</div>
+            <div class="logo">nex<span class="logo-accent">!</span>daa</div>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
@@ -482,47 +565,43 @@
             <li><a href="profile.html"><i class="fas fa-home"></i> Dashboard</a></li>
             <li><a href="connections.html"><i class="fas fa-users"></i> Connections</a></li>
             <li><a href="courses.html" class="active"><i class="fas fa-graduation-cap"></i> My Courses</a></li>
-            <li><a href="prof.html"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href=""><i class="fas fa-user"></i> Profile</a></li>
             <li class="menu-item-with-badge">
                 <a href="chat.html"><i class="fas fa-envelope"></i> Messages</a>
                 <span class="notification-badge">5</span>
             </li>
             <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-            
         </ul>
         
-        <div class="divider"></div>
-        
-        <ul class="menu" id="secondaryMenu">
+        <ul class="menu" id="secondaryMenu"> 
             <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
             <li><a href="sign.html"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
         </ul>
         
-        <div class="user-profile" onclick="prof()">
-            <div class="user-avatar" id="user-avatar">S</div>
+        <div class="user-profile">  
+            <div class="user-avatar" id="userAvatar">S</div>
             <div class="user-info">
-                <div class="user-name" id="user-name">Shyam</div>
-                <div class="user-role" id="user-role">Co-Founder & CEO</div>
+                <div class="user-name" id="userName">Shyam</div>
+                <div class="user-role" id="userRole">Co-Founder & CEO</div>
             </div>
         </div>
     </aside>
     
-    <main>
-        <div class="header-right">
-                <button class="theme-toggle" onclick="toggle()">
-                    <i class="fas fa-moon"></i>
-                </button>
-                    <div class="user-display">
-                        <div class="user-display-avatar" id="display-avatar">R</div>
-                    </div>
-            </div>
+    <main class="main-content">
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                
+            </button>
+            <div class="user-display-avatar" id="displayAvatar">R</div>
+        </div>
 
         <div class="welcome-section">
-            <h1 class="welcome-title">Welcome <span id="name"></span></h1>
-            <p class="welcome-subtitle">Search and connect with co founders & core team</p>
+            <h1 class="welcome-title">Welcome <span id="welcomeName">back</span>!</h1>
+            <p class="welcome-subtitle">Search and connect with co-founders & core team members</p>
             
             <div class="search-bar">
-                <input type="text" placeholder="Search for courses, sessions...">
+                <input type="text" placeholder="Search for courses, sessions, or topics...">
                 <button><i class="fas fa-search"></i></button>
             </div>
         </div>
@@ -534,10 +613,10 @@
             <div class="session-card">
                 <h4 class="session-title">What is Entrepreneurship?</h4>
                 <div class="session-details">
-                    <i class="fas fa-clock"></i> 30mins
+                    <i class="fas fa-clock"></i> 30 minutes
                 </div>
                 <div class="session-details">
-                    <i class="fas fa-circle" style="color: #ff5252;"></i> Live now (9mins remaining)
+                    <i class="fas fa-circle" style="color: #ff5252;"></i> Live now (9 mins remaining)
                 </div>
                 <a href="#" class="session-btn live">Join Now</a>
             </div>
@@ -545,10 +624,10 @@
             <div class="session-card">
                 <h4 class="session-title">Types Of Entrepreneurship</h4>
                 <div class="session-details">
-                    <i class="fas fa-clock"></i> 30mins
+                    <i class="fas fa-clock"></i> 30 minutes
                 </div>
                 <div class="session-date">
-                    <i class="fas fa-calendar-alt"></i> April 10 2025
+                    <i class="fas fa-calendar-alt"></i> April 10, 2025
                 </div>
                 <a href="#" class="session-btn">Register</a>
             </div>
@@ -556,16 +635,16 @@
             <div class="session-card">
                 <h4 class="session-title">Idea Validation Basics</h4>
                 <div class="session-details">
-                    <i class="fas fa-clock"></i> 1hr
+                    <i class="fas fa-clock"></i> 1 hour
                 </div>
                 <div class="session-date">
-                    <i class="fas fa-calendar-alt"></i> April 20 2025
+                    <i class="fas fa-calendar-alt"></i> April 20, 2025
                 </div>
                 <a href="#" class="session-btn">Register</a>
             </div>
         </div>
         
-        <h3 class="section-title">Recorded videos</h3>
+        <h3 class="section-title">Recorded Videos</h3>
         <div class="recorded-videos">
             <div class="video-item">
                 <div class="video-info">
@@ -573,8 +652,8 @@
                         <i class="fas fa-play"></i>
                     </div>
                     <div>
-                        <div class="video-title">Shyam - Edit Profile</div>
-                        <div class="video-duration">15mins video</div>
+                        <div class="video-title">Profile Setup Guide</div>
+                        <div class="video-duration">15 minutes</div>
                     </div>
                 </div>
                 <a href="#" class="session-btn">Watch Now</a>
@@ -587,7 +666,7 @@
                     </div>
                     <div>
                         <div class="video-title">Getting Started Guide</div>
-                        <div class="video-duration">15mins video</div>
+                        <div class="video-duration">15 minutes</div>
                     </div>
                 </div>
                 <a href="#" class="session-btn">Watch Now</a>
@@ -596,88 +675,225 @@
     </main>
     
     <script>
-        try {
-            const storedUser = JSON.parse(localStorage.getItem('User'));
-            if (storedUser) {
-                document.getElementById('user-name').textContent = storedUser.name;
-                document.getElementById('user-avatar').textContent = storedUser.name.charAt(0);
-                document.getElementById('user-role').textContent = storedUser.role
-                const displayAvatar = document.getElementById('name');
-                if (displayAvatar) {
-                    displayAvatar.textContent = storedUser.name;
-                }
+        // Theme Management
+        class ThemeManager {
+            constructor() {
+                this.body = document.body;
+                this.themeToggle = document.getElementById('themeToggle');
+                this.themeIcon = this.themeToggle.querySelector('i');
+                
+                this.init();
             }
-        } catch (error) {
-            console.error('Error setting user data:', error);
+
+            init() {
+                // Load saved theme or default to light
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                this.setTheme(savedTheme);
+                
+                this.themeToggle.addEventListener('click', () => this.toggleTheme());
+            }
+
+            setTheme(theme) {
+                this.body.setAttribute('data-theme', theme);
+                
+                if (theme === 'dark') {
+                    this.themeIcon.classList.remove('fa-moon');
+                    this.themeIcon.classList.add('fa-sun');
+                
+                } else {
+                    this.themeIcon.classList.remove('fa-sun');
+                    this.themeIcon.classList.add('fa-moon');
+                 }
+                
+                localStorage.setItem('theme', theme);
+            }
+
+            toggleTheme() {
+                const currentTheme = this.body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                this.setTheme(newTheme);
+            }
         }
-        
-        // Mobile menu functionality
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainMenu = document.getElementById('mainMenu');
-        const secondaryMenu = document.getElementById('secondaryMenu');
 
-        // Toggle menu when hamburger icon is clicked
-        mobileMenuBtn.addEventListener('click', (event) => {
-            event.stopPropagation();
-            
-            // Toggle active class on both menus
-            mainMenu.classList.toggle('active');
-            secondaryMenu.classList.toggle('active');
-            
-            // Change icon between bars and times (X)
-            const icon = mobileMenuBtn.querySelector('i');
-            if (mainMenu.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+        // Mobile Menu Management
+        class MobileMenu {
+            constructor() {
+                this.menuBtn = document.getElementById('mobileMenuBtn');
+                this.mainMenu = document.getElementById('mainMenu');
+                this.secondaryMenu = document.getElementById('secondaryMenu');
+                this.menuIcon = this.menuBtn.querySelector('i');
+                
+                this.init();
             }
-        });
 
-        // Close menu when clicking outside
-        document.addEventListener('click', (event) => {
-            const isClickInsideMenu = mainMenu.contains(event.target) || 
-                                     secondaryMenu.contains(event.target) || 
-                                     mobileMenuBtn.contains(event.target);
-            
-            if (!isClickInsideMenu && window.innerWidth <= 992) {
-                mainMenu.classList.remove('active');
-                secondaryMenu.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+            init() {
+                this.menuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleMenu();
+                });
+
+                document.addEventListener('click', (e) => this.handleOutsideClick(e));
+                window.addEventListener('resize', () => this.handleResize());
+                
+                // Close menu when clicking menu items on mobile
+                const menuLinks = document.querySelectorAll('.menu a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (window.innerWidth <= 992) {
+                            this.closeMenu();
+                        }
+                    });
+                });
             }
-        });
 
-        // Close menu when clicking on a menu item (for mobile)
-        const menuLinks = document.querySelectorAll('.menu a');
-        menuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 992) {
-                    mainMenu.classList.remove('active');
-                    secondaryMenu.classList.remove('active');
-                    const icon = mobileMenuBtn.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
+            toggleMenu() {
+                const isActive = this.mainMenu.classList.contains('active');
+                
+                if (isActive) {
+                    this.closeMenu();
+                } else {
+                    this.openMenu();
                 }
+            }
+
+            openMenu() {
+                this.mainMenu.classList.add('active');
+                this.secondaryMenu.classList.add('active');
+                this.menuIcon.classList.remove('fa-bars');
+                this.menuIcon.classList.add('fa-times');
+            }
+
+            closeMenu() {
+                this.mainMenu.classList.remove('active');
+                this.secondaryMenu.classList.remove('active');
+                this.menuIcon.classList.remove('fa-times');
+                this.menuIcon.classList.add('fa-bars');
+            }
+
+            handleOutsideClick(e) {
+                const isClickInside = this.mainMenu.contains(e.target) || 
+                                    this.secondaryMenu.contains(e.target) || 
+                                    this.menuBtn.contains(e.target);
+                
+                if (!isClickInside && window.innerWidth <= 992) {
+                    this.closeMenu();
+                }
+            }
+
+            handleResize() {
+                if (window.innerWidth > 992) {
+                    this.closeMenu();
+                }
+            }
+        }
+
+        // User Data Management
+        class UserManager {
+            constructor() {
+                this.userNameEl = document.getElementById('userName');
+                this.userAvatarEl = document.getElementById('userAvatar');
+                this.userRoleEl = document.getElementById('userRole');
+                this.welcomeNameEl = document.getElementById('welcomeName');
+                this.displayAvatarEl = document.getElementById('displayAvatar');
+                
+                this.loadUserData();
+            }
+
+            loadUserData() {
+                try {
+                    const userData = JSON.parse(localStorage.getItem('User'));
+                    if (userData && userData.name) {
+                        this.setUserData(userData);
+                    } else {
+                        this.setDefaultUserData();
+                    }
+                } catch (error) {
+                    console.error('Error loading user data:', error);
+                    this.setDefaultUserData();
+                }
+            }
+
+            setUserData(userData) {
+                const name = userData.name;
+                const role = userData.role || 'User';
+                const initial = name.charAt(0).toUpperCase();
+
+                this.userNameEl.textContent = name;
+                this.userAvatarEl.textContent = initial;
+                this.userRoleEl.textContent = role;
+                this.welcomeNameEl.textContent = name;
+                
+                if (this.displayAvatarEl) {
+                    this.displayAvatarEl.textContent = initial;
+                }
+            }
+
+            setDefaultUserData() {
+                this.userNameEl.textContent = 'Guest User';
+                this.userAvatarEl.textContent = 'G';
+                this.userRoleEl.textContent = 'Guest';
+                this.welcomeNameEl.textContent = 'Guest';
+                
+                if (this.displayAvatarEl) {
+                    this.displayAvatarEl.textContent = 'G';
+                }
+            }
+        }
+
+        // Initialize all components when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new ThemeManager();
+            new MobileMenu();
+            new UserManager();
+        });
+
+        // Utility function for profile navigation
+        function navigateToProfile() {
+            window.location.href = "prof.html";
+        }
+
+        // Add some interactive feedback
+        document.querySelectorAll('.session-btn, .theme-toggle').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Add ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s ease-out;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
             });
         });
 
-        // Handle window resize to reset menu state when switching from mobile to desktop
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 992) {
-                mainMenu.classList.remove('active');
-                secondaryMenu.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
             }
-        });
-
-        function prof() {
-            window.location.href = "prof.html";
-        }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
