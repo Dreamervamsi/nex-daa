@@ -606,8 +606,8 @@
         </li>
       </ul>
 
-      <div class="user-profile" onclick="prof()">
-        <div class="user-avatar" id="user-avatar">R</div>
+      <div class="user-profile" onclick="">     <!-- add prof() -->
+        <div class="user-avatar" id="user-avatar">R</div> 
         <div class="user-info">
           <div class="user-name" id="user-name">Radha</div>
           <div class="user-role">Co-Founder & CEO</div>
@@ -793,9 +793,9 @@
         const connectButtons = document.querySelectorAll(".connect-btn");
         connectButtons.forEach((button) => {
           button.addEventListener("click", function () {
-            this.textContent = "Connected";
+            this.textContent = "Sent request";
             this.classList.add("connected");
-            this.disabled = true;
+            this.disabled = true;searchInput
           });
         });
 
