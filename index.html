@@ -6,11 +6,12 @@
     <title>Nex!daa - Connecting Founders, Investors & Learners</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
         .nav-links a.active {
-    color: #64cce8;
-    position: relative;
-}
+            color: #64cce8;
+            position: relative;
+        }
         /* Progress bar styles */
         .progress-container {
             position: fixed;
@@ -29,56 +30,56 @@
             transition: width 0.1s ease;
         }
         /* Custom Cursor Styles */
-.cursor {
-  position: fixed;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: difference;
-  transition: transform 0.1s ease;
-}
+        .cursor {
+            position: fixed;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
 
-.cursor-outer {
-  width: 30px;
-  height: 30px;
-  border: 2px solid red;
-  transition: all 0.08s ease-out;
-}
+        .cursor-outer {
+            width: 30px;
+            height: 30px;
+            border: 2px solid red;
+            transition: all 0.08s ease-out;
+        }
 
-.cursor-inner {
-  width: 8px;
-  height: 8px;
-  background: red;
-  transition: width 0.3s ease, height 0.3s ease;
-}
+        .cursor-inner {
+            width: 8px;
+            height: 8px;
+            background: red;
+            transition: width 0.3s ease, height 0.3s ease;
+        }
 
-/* Cursor States */
-.cursor-hover .cursor-outer {
-  width: 50px;
-  height: 50px;
-  border-width: 1px;
-  background: rgba(255, 0, 0, 0.2);
-}
+        /* Cursor States */
+        .cursor-hover .cursor-outer {
+            width: 50px;
+            height: 50px;
+            border-width: 1px;
+            background: rgba(255, 0, 0, 0.2);
+        }
 
-.cursor-hover .cursor-inner {
-  width: 20px;
-  height: 20px;
-  background: white;
-}
+        .cursor-hover .cursor-inner {
+            width: 20px;
+            height: 20px;
+            background: white;
+        }
 
-.cursor-click .cursor-outer {
-  width: 40px;
-  height: 40px;
-  border: 2px solid white;
-}
+        .cursor-click .cursor-outer {
+            width: 40px;
+            height: 40px;
+            border: 2px solid white;
+        }
 
-.cursor-click .cursor-inner {
-  width: 10px;
-  height: 10px;
-  background: white;
-}
-.container {
+        .cursor-click .cursor-inner {
+            width: 10px;
+            height: 10px;
+            background: white;
+        }
+        .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
@@ -122,7 +123,7 @@
         }
         
         .hero-content {
-            width: 100%;
+            width: 50%;
         }
         
         .main-title {
@@ -146,7 +147,9 @@
         .text-change-container {
             color: #0a4254;
             background-color: #fff;
-            position: absolute;top: 39%;left: 33%;
+            position: absolute;
+            top: 39%;
+            left: 33%;
             height: 45px;
             width: 200px;
             border-radius: 5px;
@@ -155,8 +158,8 @@
         }
         .headline-container {
             display: flex;
-            align-items: center;justify-content: center;
-            
+            align-items: center;
+            justify-content: center;
             flex-wrap: wrap;
         }
         .text-change {
@@ -198,37 +201,81 @@
             }
         }
         .content-right {
-        display: flex;
-        width: 100%;
-    }
-        .spline-container {
-            width: 100%;
-            height: 600px;
-            position: relative;
-            left:20%
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
-        @media (max-width: 1024px) {
-            .hero-content {
-                flex-direction: column;
-            }
-            
-            .content-left {
-                padding-right: 0;
-                text-align: center;
-                margin-bottom: 40px;
-            }
-            
-            .content-right {
-                height: 500px;
-                width: 100%;
-            }
+        /* Circular Orbit Styles */
+        .orbit-wrapper {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
         }
-        @media (max-width: 768px) {
-         .content-right {
-                display: none;
-            }
+
+        .rotating-dot {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            animation: rotate 8s linear infinite;
         }
+
+        .rotating-dot::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: #00d9ff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00d9ff;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .orbit-img {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+        }
+
+        .img1 {
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .img2 {
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .img3 {
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .img4 {
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
         .description {
             max-width: 800px;
             color: rgba(255,255,255,0.7);
@@ -237,9 +284,33 @@
             margin-top: 30px;
         }
 
-       
+        @media (max-width: 1024px) {
+            .hero-content {
+                width: 100%;
+                padding-right: 0;
+                text-align: center;
+                margin-bottom: 40px;
+            }
+            
+            .content-right {
+                width: 100%;
+                height: 500px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content-right {
+                display: none;
+            }
+            
+            .text-change-container {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin: 20px auto;
+            }
+        }
     </style>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="preloader">
@@ -288,17 +359,20 @@
                     </div>
 
                 </div>
-                <p>Nex!daa bridges the gap between visionary founders, strategic co-founders, and forward-thinking investors while empowering the next generation of entrepreneurs.</p>
+                <p class="description">Nex!daa bridges the gap between visionary founders, strategic co-founders, and forward-thinking investors while empowering the next generation of entrepreneurs.</p>
                 
                 <div class="hero-buttons">
                     <button onclick="explore()" class="cta-button">Get Started</button>
                 </div>
             </div>
             <div class="content-right">
-                <div class="spline-container">
-                    <!-- <iframe src="https://my.spline.design/nexbotrobotcharacterconcept-0257ad690c7b098cf3d0e2b5b5230a1a/?hideUI=true" frameborder="0" width="100%" height="100%"></iframe> -->
+                <div class="orbit-wrapper">
+                    <div class="rotating-dot"></div>
+                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=300&q=80" class="orbit-img img1" />
+                    <img src="https://images.unsplash.com/photo-1531497865142-48736cfc153b?auto=format&fit=crop&w=300&q=80" class="orbit-img img2" />
+                    <img src="https://images.unsplash.com/photo-1560264418-c4445382edbc?auto=format&fit=crop&w=300&q=80" class="orbit-img img3" />
+                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=300&q=80" class="orbit-img img4" />
                 </div>
-            </div>
             </div>
         </div>
         <div class="scroll-down">
@@ -347,7 +421,7 @@
     <section id="about" class="about">
         <div class="container">
             <div class="about-content">
-                <h2>Why <span>Choose</span> Nex <span style="color: red">!</span>daa?</h2>
+                <h2>Why <span>Choose</span> Nex<span style="color: red">!</span>daa?</h2>
                 <p>At Nex!daa, we understand the challenges of building a startup from the ground up. Our platform is designed to provide the essential connections and knowledge you need to succeed in today's competitive landscape.</p>
                 <ul>
                     <li><i class="fas fa-check"></i> Curated network of verified professionals</li>
@@ -369,11 +443,11 @@
             </div>
             <div class="box b2">
                 <h2>Our Investor Network</h2>
-                <p>At Nex!daa, we understand that securing the right investment is crucial for every startup’s journey</p>
+                <p>At Nex!daa, we understand that securing the right investment is crucial for every startup's journey</p>
             </div>
             <div class="box b3">
                 <h2>Join the Movement</h2>
-                <p>Be part of the platform that’s redefining startup connections and shaping the future of entrepreneurship. At Nex!daa, we are building a thriving ecosystem where innovators, founders, investors, and mentors come together to turn bold ideas into reality.</p>
+                <p>Be part of the platform that's redefining startup connections and shaping the future of entrepreneurship. At Nex!daa, we are building a thriving ecosystem where innovators, founders, investors, and mentors come together to turn bold ideas into reality.</p>
             </div>
         </div>
     </section>
@@ -586,19 +660,20 @@
             duration: 1,
         });
         
-gsap.from(".navbar", {
-    y: -100,
-    duration:1,
-    
-    ease: "power2.out",
-    immediateRender: false
-});
+        gsap.from(".navbar", {
+            y: -100,
+            duration:1,
+            ease: "power2.out",
+            immediateRender: false
+        });
+        
         gsap.from(".hero-content p", { 
             opacity: 0, 
             y: 150, 
             delay:0.5,
             duration: 1.2,
         });
+        
         gsap.from(".hero-content .text-change-container",{
             opacity: 0, 
             y: 150, 
@@ -618,6 +693,16 @@ gsap.from(".navbar", {
             y: 150, 
             delay:0.5,
             duration: 1.2,
+        });
+        
+        // Animation for the orbit wrapper
+        gsap.from(".orbit-wrapper", {
+            opacity: 0,
+            scale: 0.8,
+            rotation: 30,
+            duration: 1.5,
+            delay: 0.5,
+            ease: "back.out(1.2)"
         });
      }   
         
@@ -816,91 +901,52 @@ gsap.from(".navbar", {
         window.location.href = "explore.html";
     }
    
-// document.addEventListener('DOMContentLoaded', function() {
-//   const cursorOuter = document.querySelector('.cursor-outer');
-//   const cursorInner = document.querySelector('.cursor-inner');
-//   const hoverElements = document.querySelectorAll('a, button, input[type="submit"], input[type="button"], .hover-effect');
-  
-//   // Track cursor position
-// //   document.addEventListener('mousemove', function(e) {
-// //     cursorOuter.style.left = e.clientX + 'px';
-// //     cursorOuter.style.top = e.clientY + 'px';
-// //     cursorInner.style.left = e.clientX + 'px';
-// //     cursorInner.style.top = e.clientY + 'px';
-// //   });
-  
-//   // Add hover effects
-// //   hoverElements.forEach(el => {
-// //     el.addEventListener('mouseenter', () => {
-// //       document.body.classList.add('cursor-hover');
-// //     });
-// //     el.addEventListener('mouseleave', () => {
-// //       document.body.classList.remove('cursor-hover');
-// //     });
-// //   });
-  
-// //   // Click effect
-// //   document.addEventListener('mousedown', () => {
-// //     document.body.classList.add('cursor-click');
-// //   });
-// //   document.addEventListener('mouseup', () => {
-// //     document.body.classList.remove('cursor-click');
-// //   });
-  
-//   // Hide cursor on touch devices
-//   const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-//   if (isTouchDevice) {
-//     cursorOuter.style.display = 'none';
-//     cursorInner.style.display = 'none';
-//     document.body.style.cursor = 'auto';
-//   }
-// });
-gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger);
 
-let tl = gsap.timeline({
-  scrollTrigger: {
-    trigger: '.about-content',
-    start: 'top 80%',
-    toggleActions: 'play none none none'
-  }
-});
-
-tl.from('.about-content h2', {
-  opacity: 0,
-  y: 200,
-  duration: 0.5
-})
-.from('.about-content p', {
-  opacity: 0,
-  y: 200,
-  duration: 0.5
-})
-.from('.about-content ul li', {
-  opacity: 0,
-  y: 200,
-  duration: 0.5,
-  stagger: 0.3
-});
-// Replace the current scroll event listener with this
-window.addEventListener("scroll", () => {
-    const scrollY = window.scrollY;
-    
-    document.querySelectorAll('section').forEach((section) => {
-        const top = section.offsetTop - 100;
-        const height = section.offsetHeight;
-        const id = section.id;
-
-        if (scrollY >= top && scrollY < top + height) {
-            document.querySelectorAll(".nav-links a").forEach((link) => {
-                link.classList.remove("active");
-                if (link.getAttribute('href') === `#${id}`) {
-                    link.classList.add("active");
-                }
-            });
-        }
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.about-content',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
     });
-});
 
+    tl.from('.about-content h2', {
+      opacity: 0,
+      y: 200,
+      duration: 0.5
+    })
+    .from('.about-content p', {
+      opacity: 0,
+      y: 200,
+      duration: 0.5
+    })
+    .from('.about-content ul li', {
+      opacity: 0,
+      y: 200,
+      duration: 0.5,
+      stagger: 0.3
+    });
+    
+    // Replace the current scroll event listener with this
+    window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+        
+        document.querySelectorAll('section').forEach((section) => {
+            const top = section.offsetTop - 100;
+            const height = section.offsetHeight;
+            const id = section.id;
+
+            if (scrollY >= top && scrollY < top + height) {
+                document.querySelectorAll(".nav-links a").forEach((link) => {
+                    link.classList.remove("active");
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add("active");
+                    }
+                });
+            }
+        });
+    });
  </script>
 </body>
 </html>
