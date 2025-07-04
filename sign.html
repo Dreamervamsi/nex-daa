@@ -229,7 +229,7 @@
             </div>
             <button type="button" onclick="nextStep()">Continue</button>
             <div class="login-link">
-                Already have an account? <a href="#">Login</a>
+                Already have an account? <a href="login.html">Login</a>
             </div>
         </div>
 
@@ -391,7 +391,6 @@
             
             if (!isValid) return;
             
-            // Move to next step
             document.getElementById(`step${currentStep}`).classList.remove('active');
             currentStep++;
             document.getElementById(`step${currentStep}`).classList.add('active');
@@ -429,7 +428,6 @@
             
             if (!isValid) return;
             
-            // Get all form values
             const userData = {
                 name: document.getElementById('fullname').value.trim(),
                 email: document.getElementById('email').value.trim(),
@@ -444,18 +442,18 @@
                 education: document.getElementById('education').value.trim()
             };
 
-            // Store in localStorage
+            
             localStorage.setItem('User', JSON.stringify(userData));
             
-            // Log to console for demonstration
+            
             console.log('User data:', userData);
             
-            // Redirect to profile page
+            
             window.location.href = "profile.html";
             return true;
         }
 
-        // Initialize progress bar
+        
         updateProgressBar();
     </script>
 </body>

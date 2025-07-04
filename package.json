@@ -1,6 +1,6 @@
 {
   "dependencies": {
     "cli": "^1.0.1",
-    "surge": "^0.24.6"
+    "surge": "^0.0.0"
   }
 }
